@@ -1,0 +1,67 @@
+{
+  "_from": "pdf-annotate-vue@^1.0.1",
+  "_id": "pdf-annotate-vue@1.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-lE2Z+QfZ7B0RfWw5kKl8usEnXSKPjEbDrnJhRQEaG4fe2Cb69aL0R0oUwfMgoNsUUZd2wv7zDi0KbocF2XcPHg==",
+  "_location": "/pdf-annotate-vue",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "pdf-annotate-vue@^1.0.1",
+    "name": "pdf-annotate-vue",
+    "escapedName": "pdf-annotate-vue",
+    "rawSpec": "^1.0.1",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/pdf-annotate-vue/-/pdf-annotate-vue-1.0.2.tgz",
+  "_shasum": "5ac83e90d27daf5262dcd840bc9b9cc4a1fc7ddf",
+  "_spec": "pdf-annotate-vue@^1.0.1",
+  "_where": "E:\\Tribunal Supremo de Justicia\\despacho\\visor",
+  "author": {
+    "name": "Liang Shihua"
+  },
+  "bugs": {
+    "url": "https://github.com/AaronLeong/pdf-annotate-vue/issues",
+    "email": "mc2liang@gmail.com"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "create-stylesheet": "^0.3.0",
+    "pdfjs-dist": "^2.0.943"
+  },
+  "deprecated": false,
+  "description": "Annotation layer for pdf.js in vue",
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "homepage": "https://github.com/AaronLeong/pdf-annotate-vue",
+  "keywords": [
+    "pdf",
+    "annotation",
+    "pdf.js",
+    "pdfjs",
+    "vue"
+  ],
+  "license": "MIT",
+  "main": "./src/pdfAnnotate.vue",
+  "name": "pdf-annotate-vue",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaronLeong/pdf-annotate-vue.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.2"
+}
