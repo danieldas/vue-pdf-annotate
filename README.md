@@ -1,11 +1,10 @@
  
 ## Install
 
-```
-npm install pdf-annotate-vue -S
-or
-yarn add pdf-annotate-vue -S
-```
+
+npm install https://github.com/danieldas/vue-pdf-annotate
+
+
 
 ## Example
 

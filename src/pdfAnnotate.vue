@@ -8,9 +8,7 @@
       </iframe>
     </div>
   <div class="main" >
-    <div class="toolbar" v-if="toolbar" style="margin-top: -1px; box-shadow: 2px 5px 3px #4f4d4d; margin: 4px, 4px;
-                overflow: auto;
-                white-space: nowrap; ">
+    <div class="toolbar" v-if="toolbar">
       <button style="font-size: 120%" class="cursor" type="button" title="Cursor" data-tooltype="cursor">➚</button>
       <button class="eraser" type="button" title="Borrador" data-tooltype="eraser">⌫</button>
 
@@ -35,8 +33,8 @@
       <div class="spacer"></div>
 
       <button class="pen" type="button" title="Lápiz" data-tooltype="draw">✎</button>
-      <select class="pen-size"></select>
-      <div class="pen-color" style="font-family: 'Roboto'"></div>
+      <select class="pen-size" style="font-family: 'Roboto'"></select>
+      <div class="pen-color"></div>
 
       <div class="spacer"></div>
 

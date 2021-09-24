@@ -24,6 +24,11 @@ body {
   -webkit-box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,1);
      -moz-box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,1);
           box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,1);
+  margin-top: -1px;
+  box-shadow: 2px 5px 3px #4f4d4d;
+  margin: 4px, 4px;
+  display: inline-table;
+  width: 100%;
 }
 .toolbar .spacer {
   display: inline-block;
