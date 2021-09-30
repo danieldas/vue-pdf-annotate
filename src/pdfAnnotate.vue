@@ -2,10 +2,10 @@
   <div>
     <div>
       <iframe
-        :src="src" id="myFrame"
-        frameborder="0" style="border:0;"
-        width="0" height="0">
-      </iframe>
+        :src="src" id="myFrame" name="myFrame"
+        type="application/pdf"
+        width="0" height="0"/>
+
     </div>
   <div class="main" >
     <div class="toolbar" v-if="toolbar">
@@ -27,13 +27,13 @@
       <div class="spacer"></div>
 
       <button class="text" type="button" title="Texto" data-tooltype="text"></button>
-      <select class="text-size" style="font-family: 'Roboto'"></select>
+      <select class="text-size" style="font-family: 'Roboto'; background-color: white; padding-left: 5px; padding-right: 5px"></select>
       <div class="text-color"></div>
 
       <div class="spacer"></div>
 
       <button class="pen" type="button" title="Lápiz" data-tooltype="draw">✎</button>
-      <select class="pen-size" style="font-family: 'Roboto'"></select>
+      <select class="pen-size" style="font-family: 'Roboto'; background-color: white; padding-left: 5px; padding-right: 5px"></select>
       <div class="pen-color"></div>
 
       <div class="spacer"></div>
@@ -42,10 +42,9 @@
 
       <div class="spacer"></div>
 
-      <select class="scale" style="font-family: 'Roboto'">
+      <select class="scale" style="font-family: 'Roboto'; background-color: white; padding-left: 5px; padding-right: 5px">
         <option value=".5">50%</option>
         <option value="1">100%</option>
-        <option value="1.0">100%</option>
         <option value="1.5">150%</option>
         <option value="2">200%</option>
       </select>
@@ -60,6 +59,10 @@
       <button style="font-size: 130%"  @click="listarComentarios" id="listarComentarios" class="listComments" type="button" title="Listar Comentarios" data-tooltype="cursor"> &#x2261; </button>
       <div class="spacer"></div>
       <button style="font-size: 130%;" @click="imprimir" type="button" title="Imprimir" >🖶</button>
+      <div class="spacer"></div>
+
+      <button style="background-color: #1976D2; padding-left: 10px; padding-right: 10px; font-family: Roboto" @click="guardar">Guardar</button>
+      <button style="background-color: #eeeeee; padding-left: 10px; padding-right: 10px; font-family: Roboto; color: black; margin-left: 2px" @click="cancelar" >Cancelar</button>
 
 <!--      <button class="btn" id="prev-page" @click="aumentarPagina">-->
 <!--        &#xAB;-->
@@ -72,13 +75,13 @@
 <!--            Page <span id="page-num"></span> of <span id="page-count"></span>-->
 <!--        </span>-->
     </div>
-    <div id="content-wrapper" style="margin-top: 14px; background-color: #757575">
+    <div id="content-wrapper" style="margin-top: -22px; background-color: #757575">
       <div id="viewer" class="pdfViewer" ></div>
     </div>
 
     <div v-if="commentWrapper" id="comment-wrapper" style="margin-top: 16px">
-      <h3 style="font-family: 'Roboto Black'" >Comentarios</h3>
-      <div class="comment-list">
+      <h3 style="font-family: 'Roboto Black'; text-align: center" >Comentarios</h3>
+      <div class="comment-list" style="text-align: center">
         <div class="comment-list-container">
           <div class="comment-list-item">No existen comentarios</div>
         </div>
@@ -220,6 +223,14 @@ export default {
     // this.listarComentarios();
   },
   methods: {
+    cancelar(){
+      if (confirm("¿Seguro que quiere cerrar el editor sin guardar los cambios?")) {
+        close();
+      }
+    },
+    guardar(){
+      this.$emit("guardar")
+    },
     async verComentarios(){
       if (this.RENDER_OPTIONS.seeComments !== this.ver) {
         this.RENDER_OPTIONS.seeComments = await this.ver;
@@ -227,10 +238,92 @@ export default {
         await this.render();
       }
     },
-    imprimir(){
-      let objFra = document.getElementById('myFrame');
-      objFra.contentWindow.focus();
-      objFra.contentWindow.print();
+    async imprimir(){
+
+
+      let url = this.src;
+      var printWindow = window.open(url, '_blank');
+      printWindow.onload = function () {
+        var isIE = /(MSIE|Trident\/|Edge\/)/i.test(navigator.userAgent);
+        if (isIE) {
+          printWindow.print();
+          setTimeout(function () {
+            printWindow.close();
+          }, 100);
+
+        } else {
+
+          setTimeout(function () {
+            printWindow.print();
+            var ival = setInterval(function () {
+              printWindow.close();
+              clearInterval(ival);
+            }, 200);
+          }, 500);
+        }
+      }
+
+      // var proxyIframe = document.createElement('iframe');
+      // var body = document.getElementsByTagName('body')[0];
+      // body.appendChild(proxyIframe);
+      // proxyIframe.style.width = '100%';
+      // proxyIframe.style.height = '100%';
+      // proxyIframe.style.display = 'none';
+      // var contentWindow = proxyIframe.contentWindow;
+      // contentWindow.document.open();
+      // // Set dimensions according to your needs.
+      // // You may need to calculate the dynamically after the content has loaded
+      // contentWindow.document.write('<iframe src="' + this.src + '" onload="print();" width="1000" height="1800" frameborder="0" marginheight="0" marginwidth="0">');
+      // contentWindow.document.close();
+
+      // var iframe = document.createElement('iframe');
+      //
+      // // Define the source.
+      // iframe.src = this.src;
+      // // Add the IFrame to the web page.
+      // document.body.appendChild(iframe);
+      //
+      // iframe.onload = function() {
+      //   setTimeout(function() {
+      //     iframe.contentWindow.focus();
+      //     iframe.contentWindow.print(); // Print.
+      //   }, 1);
+      // };
+
+      // var doc = document.getElementById("myFrame");
+      //Wait until PDF is ready to print
+      // if (typeof doc.print === 'undefined') {
+      //   setTimeout(function(){printDocument(documentId);}, 1000);
+      // } else {
+      //   doc.print();
+      // }
+      // var w = window.focus(this.src);
+      // w.print();
+//       var iframe = this._printIframe;
+//       if (!this._printIframe) {
+//         iframe = this._printIframe = document.createElement('iframe');
+//         iframe.src = this.src;
+//
+//         document.body.appendChild(iframe);
+//
+//         iframe.style.display = 'none';
+//         iframe.onload = function() {
+//           setTimeout(function() {
+//             iframe.focus();
+//             iframe.contentWindow.print();
+//           }, 1);
+//         };
+//       }
+// console.log('dasssssssssssssssssssssssss');
+//       // window.frames["myFrame"].focus();
+//       // window.frames["myFrame"].print();
+
+      // let objFra = await document.getElementById('myFrame');
+      // await objFra.contentWindow.focus();
+      // await objFra.contentWindow.print();
+      // var newWin = window.frames["myFrame"];
+      // newWin.document.write('<body onload="window.print()">dddd</body>');
+      // newWin.document.close();
     },
 
     aumentarPagina(){
